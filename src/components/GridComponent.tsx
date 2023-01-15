@@ -14,7 +14,7 @@ const GridComponent = <T extends {}>({
 }: GridComponentProps<T>) => {
   const gridRef = useRef<AgGridReact<T>>(null);
 
-  const defaultColDefs: ColDef<T> = useMemo(
+  const defaultColDef: ColDef<T> = useMemo(
     () => ({
       sortable: true,
       filter: true,
@@ -28,7 +28,7 @@ const GridComponent = <T extends {}>({
         ref={gridRef}
         rowData={rowData}
         columnDefs={colDefs}
-        defaultColDef={defaultColDefs}
+        defaultColDef={defaultColDef}
         animateRows={true}
       />
     </div>
