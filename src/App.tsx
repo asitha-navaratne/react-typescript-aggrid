@@ -4,6 +4,7 @@ import "./App.css";
 import { ColDef } from "ag-grid-community";
 
 import Athlete from "./types/Athlete";
+
 import GridComponent from "./components/GridComponent";
 
 const url = "https://www.ag-grid.com/example-assets/olympic-winners.json";
