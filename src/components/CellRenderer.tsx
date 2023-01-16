@@ -1,25 +1,35 @@
+import { useCallback } from "react";
+
 import CellRendererProps from "../types/CellRendererProps";
 
-const CellRenderer = <T extends {}>(params: CellRendererProps<T>) => {
+const CellRenderer = (params: CellRendererProps) => {
+  const openModal = useCallback(() => {
+    if (params.colDef?.field === "athlete") {
+      window.alert(`Total Medals: ${params.data?.total}`);
+    } else if (params.colDef?.field === "age") {
+      window.alert(
+        `Age: ${params.data?.total}, YOB: ${
+          params.data ? params.data?.year - params.data?.age : "-"
+        }`
+      );
+    } else if (params.colDef?.field === "year") {
+      window.alert(params.displayText);
+    }
+  }, [params]);
+
   if (params.colDef?.field === "age") {
     return (
       <div>
-        {params.value ? params.value : params.buttonText}{" "}
-        <button
-          onClick={() => params.openModal(params.colDef?.field, params.data)}
-        >
-          {params.buttonText}
-        </button>
+        {params.value ? params.value : params.displayText}{" "}
+        <button onClick={openModal}>{params.buttonText}</button>
       </div>
     );
   }
 
   return (
     <div>
-      <button
-        onClick={() => params.openModal(params.colDef?.field, params.data)}
-      >
-        {params.value ? params.value : params.buttonText}
+      <button onClick={openModal}>
+        {params.value ? params.value : params.displayText}
       </button>
     </div>
   );

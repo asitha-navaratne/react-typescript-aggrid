@@ -1,8 +1,10 @@
 import { ICellRendererParams } from "ag-grid-community";
 
-type CellRendererProps<T> = ICellRendererParams<T> & {
+import Athlete from "./Athlete";
+
+type CellRendererProps = ICellRendererParams<Athlete> & {
   buttonText?: string;
-  openModal: (field: string | undefined, athlete: T | undefined) => void;
+  displayText?: string;
 };
 
 export default CellRendererProps;

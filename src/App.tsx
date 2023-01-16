@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
 
 import { ColDef } from "ag-grid-community";
@@ -19,32 +19,12 @@ function App() {
       .then((result) => setRowData(result));
   }, []);
 
-  const openModal = useCallback(
-    (field: string | undefined, athlete: Athlete | undefined) => {
-      if (field === "athlete") {
-        window.alert(`Total Medals: ${athlete?.total}`);
-      } else if (field === "age") {
-        window.alert(
-          `Age: ${athlete?.age}, YOB: ${
-            athlete ? athlete?.year - athlete?.age : "-"
-          }`
-        );
-      } else if (field === "year") {
-        window.alert(
-          "The 2000 Games received universal acclaim, with the organisation, volunteers, sportsmanship, and Australian public being lauded in the international media."
-        );
-      }
-    },
-    []
-  );
-
   const colDefs: ColDef<Athlete>[] = [
     {
       field: "athlete",
       cellRenderer: CellRenderer,
       cellRendererParams: {
-        buttonText: "N/A",
-        openModal: openModal,
+        displayText: "N/A",
       },
     },
     {
@@ -52,7 +32,7 @@ function App() {
       cellRenderer: CellRenderer,
       cellRendererParams: {
         buttonText: "+",
-        openModal: openModal,
+        displayText: "N/A",
       },
     },
     { field: "country" },
@@ -63,7 +43,8 @@ function App() {
           return {
             component: CellRenderer,
             params: {
-              openModal: openModal,
+              displayText:
+                "The 2000 Games received universal acclaim, with the organisation, volunteers, sportsmanship, and Australian public being lauded in the international media.",
             },
           };
         }
