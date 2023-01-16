@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { useCallback, memo } from "react";
 
 import CellRendererProps from "../types/CellRendererProps";
 
@@ -35,4 +35,4 @@ const CellRenderer = (params: CellRendererProps) => {
   );
 };
 
-export default CellRenderer;
+export default memo(CellRenderer);
