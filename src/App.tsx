@@ -1,6 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import "./App.css";
 
+import { AgGridReact } from "ag-grid-react";
 import { ColDef } from "ag-grid-community";
 
 import Athlete from "./types/Athlete";
@@ -12,6 +13,8 @@ const url = "https://www.ag-grid.com/example-assets/olympic-winners.json";
 
 function App() {
   const [rowData, setRowData] = useState<Athlete[]>([]);
+
+  const gridRef = useRef<AgGridReact<Athlete>>(null);
 
   useEffect(() => {
     fetch(url)
@@ -58,9 +61,14 @@ function App() {
     { field: "total" },
   ];
 
+  const deselectRows = function () {
+    gridRef.current?.api.deselectAll();
+  };
+
   return (
     <div className="App">
-      <GridComponent rowData={rowData} colDefs={colDefs} />
+      <button onClick={deselectRows}>Deselect Rows</button>
+      <GridComponent rowData={rowData} colDefs={colDefs} gridRef={gridRef} />
     </div>
   );
 }

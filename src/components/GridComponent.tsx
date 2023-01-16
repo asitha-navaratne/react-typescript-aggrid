@@ -1,4 +1,4 @@
-import { useMemo, useRef } from "react";
+import { useMemo } from "react";
 
 import { AgGridReact } from "ag-grid-react";
 import { ColDef } from "ag-grid-community";
@@ -11,9 +11,8 @@ import GridComponentProps from "../types/GridComponentProps";
 const GridComponent = <T extends {}>({
   rowData,
   colDefs,
+  gridRef,
 }: GridComponentProps<T>) => {
-  const gridRef = useRef<AgGridReact<T>>(null);
-
   const defaultColDef: ColDef<T> = useMemo(
     () => ({
       sortable: true,
@@ -30,6 +29,7 @@ const GridComponent = <T extends {}>({
         columnDefs={colDefs}
         defaultColDef={defaultColDef}
         animateRows={true}
+        rowSelection="multiple"
       />
     </div>
   );
