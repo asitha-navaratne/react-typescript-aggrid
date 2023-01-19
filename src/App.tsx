@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import "./App.css";
 
 import { AgGridReact } from "ag-grid-react";
@@ -15,6 +15,9 @@ function App() {
   const [rowData, setRowData] = useState<Athlete[]>([]);
 
   const gridRef = useRef<AgGridReact<Athlete>>(null);
+  const savedFilterState = useRef<{
+    [key: string]: any;
+  } | null>(null);
 
   useEffect(() => {
     fetch(url)
@@ -67,9 +70,21 @@ function App() {
     gridRef.current?.api.deselectAll();
   };
 
+  const onButtonSave = useCallback(() => {
+    savedFilterState.current = gridRef.current!.api.getFilterModel();
+  }, []);
+
+  const onButtonApply = useCallback(() => {
+    gridRef.current!.api.setFilterModel(savedFilterState.current);
+  }, []);
+
   return (
     <div className="App">
       <button onClick={deselectRows}>Deselect Rows</button>
+      <div>
+        <button onClick={onButtonSave}>Save</button>
+        <button onClick={onButtonApply}>Apply</button>
+      </div>
       <GridComponent rowData={rowData} colDefs={colDefs} gridRef={gridRef} />
     </div>
   );
