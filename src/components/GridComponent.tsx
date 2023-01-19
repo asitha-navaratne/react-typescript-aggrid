@@ -29,6 +29,7 @@ const GridComponent = <T extends {}>({
     <div className="ag-theme-alpine" style={{ height: 500 }}>
       <AgGridReact<T>
         ref={gridRef}
+        popupParent={document.body}
         rowData={rowData}
         columnDefs={colDefs}
         defaultColDef={defaultColDef}
