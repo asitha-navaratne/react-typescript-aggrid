@@ -33,6 +33,7 @@ function App() {
         displayText: "N/A",
       },
       filter: "agTextColumnFilter",
+      floatingFilter: true,
     },
     {
       field: "age",
