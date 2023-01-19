@@ -17,6 +17,10 @@ const GridComponent = <T extends {}>({
     () => ({
       sortable: true,
       filter: true,
+      filterParams: {
+        debounceMs: 0,
+        buttons: ["apply", "clear", "cancel", "reset"],
+      },
     }),
     []
   );

@@ -29,6 +29,7 @@ function App() {
       cellRendererParams: {
         displayText: "N/A",
       },
+      filter: "agTextColumnFilter",
     },
     {
       field: "age",
@@ -37,6 +38,7 @@ function App() {
         buttonText: "+",
         displayText: "N/A",
       },
+      filter: "agNumberColumnFilter",
     },
     { field: "country" },
     {
